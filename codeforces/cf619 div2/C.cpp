@@ -19,32 +19,41 @@ template<class T>inline void read(T &x) {
     if(f)x=-x;
 }
 const int inf=0x3f3f3f3f;
-ll T,n,b,g;
+ll T,n,m;
 int main()
 {
 	cin>>T;
 	while(T--)
 	{
-		cin>>n>>g>>b;
-		ll t;
-		if((n/2)*2!=n)
+		cin>>n>>m;
+		if(m==0)
 		{
-			t=(n/2)+1;
+			puts("0");
+			continue;
 		}
-		else t=(n/2);
-		ll tt,res;
-		if((t/g)*g!=t) 
+		else
 		{
-			tt=(t/g)+1;
-			res=(tt-1)*(g+b)+(t%g);
+			ll ans=n*(n+1)/2;
+			ans-=n-m;
+			ll temp=n/2;
+			if(m>=temp) cout<<ans<<endl;
+			else
+			{
+				if((n-m)%(m+1)==0)
+				{
+					ll temp=(n-m)/(m+1);
+					ll tt=temp*(temp-1)/2;
+					cout<<ans-tt*(m+1)<<endl;
+				}
+				else
+				{
+					ll t2=(n-m)%m;
+					if(t2==0) t2=(n-m)/m;
+					ll t1=(n-m-t2)/m;
+					cout<<ans-m*(t1-1)*t1/2-(t2-1)*t2/2<<endl;
+				}
+			}
 		}
-		else 
-		{
-			tt=t/g;
-			res=(tt-1)*b+tt*g;
-		}
-		cout<<max(res,n)<<endl;
 	}
 	return 0;
 }
-
