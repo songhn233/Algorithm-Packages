@@ -39,19 +39,11 @@ int main()
 			if(m>=temp) cout<<ans<<endl;
 			else
 			{
-				if((n-m)%(m+1)==0)
-				{
-					ll temp=(n-m)/(m+1);
-					ll tt=temp*(temp-1)/2;
-					cout<<ans-tt*(m+1)<<endl;
-				}
-				else
-				{
-					ll t2=(n-m)%m;
-					if(t2==0) t2=(n-m)/m;
-					ll t1=(n-m-t2)/m;
-					cout<<ans-m*(t1-1)*t1/2-(t2-1)*t2/2<<endl;
-				}
+				ll ans=n*(n+1)/2;
+				n=n-m;
+				ll temp=n/(m+1);
+				ll tt=n%(m+1);
+				cout<<ans-tt*(temp+1)*(temp+2)/2-(m+1-tt)*(temp+1)*temp/2<<endl;
 			}
 		}
 	}
