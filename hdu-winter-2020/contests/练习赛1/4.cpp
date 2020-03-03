@@ -20,20 +20,25 @@ template<class T>inline void read(T &x) {
 }
 const int inf=0x3f3f3f3f;
 const int maxn=1000;
-int n,a[maxn],b[maxn];
+int n,a[maxn],f[maxn][maxn];
 int main()
 {
 	cin>>n;
-	for(int i=1;i<=n;i++) cin>>a[i];
-	sort(a+1,a+n+1);
-	for(int i=n+1;i<=2*n;i++) a[i]=a[i-n];
+	for(int i=1;i<=n;i++) cin>>a[i],a[i+n]=a[i];
+	for(int len=2;len<=n;len++)
+	{
+		for(int l=1;l<=2*n-len+1;l++)
+		{
+			int r=l+len-1;
+			for(int k=l;k<=r-1;k++)
+			{
+				f[l][r]=max(f[l][r],f[l][k]+f[k+1][r]+abs(a[l]-a[k+1]));
+			}
+		}
+	}
 	int ans=0;
-	for(int i=2;i<=n;i++)
-		ans+=abs(a[i]-a[1]);
-	int temp=0;
-	for(int i=1;i<=n-1;i++)
-		temp+=abs(a[i]-a[n]);
-	cout<<max(ans,temp)<<endl;
+	for(int i=1;i<=n+1;i++) ans=max(ans,f[i][i+n-1]);
+	cout<<ans<<endl;
 	return 0;
 }
 
