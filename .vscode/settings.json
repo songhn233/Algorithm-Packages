@@ -2,6 +2,7 @@
   "files.associations": {
     "*.vue": "vue",
     "iostream": "cpp",
-    "algorithm": "cpp"
+    "algorithm": "cpp",
+    "cstdlib": "cpp"
   }
 }
