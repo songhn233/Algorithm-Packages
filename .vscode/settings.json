@@ -3,6 +3,7 @@
     "*.vue": "vue",
     "iostream": "cpp",
     "algorithm": "cpp",
-    "cstdlib": "cpp"
+    "cstdlib": "cpp",
+    "ostream": "cpp"
   }
 }
