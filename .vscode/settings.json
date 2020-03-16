@@ -1,0 +1,7 @@
+{
+  "files.associations": {
+    "*.vue": "vue",
+    "utility": "cpp",
+    "ostream": "cpp"
+  }
+}

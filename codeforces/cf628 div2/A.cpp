@@ -19,8 +19,14 @@ template<class T>inline void read(T &x) {
   if(f)x=-x;
 }
 const int inf=0x3f3f3f3f;
-
+int T,x;
 int main()
 {
+  cin>>T;
+  while(T--)
+  {
+    cin>>x;
+    cout<<x-1<<" "<<1<<endl;
+  }
   return 0;
 }
