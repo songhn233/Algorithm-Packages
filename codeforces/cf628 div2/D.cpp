@@ -37,7 +37,7 @@ int main()
   else
   {
     int top=0;
-    rep(i,0,63)
+    rep(i,0,62)
     {
       a[i]=u>>i&1;
       b[i]=v>>i&1;
