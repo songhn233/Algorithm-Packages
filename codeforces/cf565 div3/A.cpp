@@ -21,34 +21,22 @@ template<class T>inline void rd(T &x) {
   if(f)x=-x;
 }
 const int inf=0x3f3f3f3f;
-const int maxn=100050;
-const double eps=1e-7;
-int n;
-double x[maxn],y[maxn];
-double xx,yy;
-bool check(double x,double y)
-{
-  if(fabs(x-y)<eps) return true;
-  return false;
-}
+int T;
+ll n;
+ll t1,t2,t3;
 int main()
 {
-  cin>>n;
-  rep(i,1,n) cin>>x[i]>>y[i];	
-  if(n&1) puts("NO");
-  else
+  cin>>T;
+  while(T--)
   {
-    int t=n>>1;
+    cin>>n;
+    t1=t2=t3=0;
     int flag=1;
-    xx=(x[1]+x[t+1])*0.5;
-    yy=(y[1]+y[t+1])*0.5;
-    rep(i,2,t)
-    {
-      if(!check((x[i]+x[t+i])*0.5,xx)||!check((y[i]+y[t+i])*0.5,yy)){flag=0;break;}
-    }
-    if(flag) puts("YES");
-    else puts("NO");
+    while(n%2==0) n/=2,t1++;
+    while(n%3==0) n/=3,t2++; 
+    while(n%5==0) n/=5,t3++;
+    if(n>1) puts("-1");
+    else cout<<(t1+t2*2+t3*3)<<endl;
   }
-  
   return 0;
 }
