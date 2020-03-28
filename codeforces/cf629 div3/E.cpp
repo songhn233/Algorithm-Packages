@@ -15,10 +15,10 @@
 #define dep(i,x,y) for(auto i=(x);i>=(y);--i)
 using namespace std;
 template<class T>inline void rd(T &x) {
-  x=0; int ch=getchar(),f=0;
-  while(ch<'0'||ch>'9'){if (ch=='-') f=1;ch=getchar();}
-  while (ch>='0'&&ch<='9'){x=(x<<1)+(x<<3)+(ch^48);ch=getchar();}
-  if(f)x=-x;
+	x=0; int ch=getchar(),f=0;
+	while(ch<'0'||ch>'9'){if (ch=='-') f=1;ch=getchar();}
+	while (ch>='0'&&ch<='9'){x=(x<<1)+(x<<3)+(ch^48);ch=getchar();}
+	if(f)x=-x;
 }
 const int inf=0x3f3f3f3f;
 const int maxn=200050;
@@ -27,10 +27,10 @@ int head[maxn],num=0;
 int d[maxn],fa[maxn],siz[maxn],son[maxn],top[maxn];
 int q[maxn];
 struct edge{
-  int val,id;
-  bool operator<(const edge&t) const{
-    return val<t.val;
-  }
+  	int val,id;
+  	bool operator<(const edge&t) const{
+    	return val<t.val;
+  	}
 }dis[maxn];
 struct node{
 	int v,nex;
@@ -85,32 +85,32 @@ int main()
 		int x,y;rd(x),rd(y);
 		add(x,y);
 	}
-  s=1;
+	s=1;
 	d[s]=1;
 	dfs1(s,0);
 	dfs2(s,s);
 	while(m--)
 	{
 		int k;rd(k);
-    rep(i,1,k) 
-    {
-      rd(q[i]);
-      if(q[i]!=1) q[i]=fa[q[i]];
-    }
-    rep(i,1,k) dis[i].val=d[q[i]],dis[i].id=q[i];
-    sort(dis+1,dis+k+1);
-    int flag=1;
-    rep(i,2,k)
-    {
-      if(lca(dis[i-1].id,dis[i].id)==dis[i-1].id) continue;
-      else 
-      {
-        flag=0;
-        break;
-      }
-    }
-    if(flag) puts("YES");
-    else puts("NO");
+    	rep(i,1,k) 
+    	{
+      		rd(q[i]);
+      		if(q[i]!=1) q[i]=fa[q[i]];
+    	}
+    	rep(i,1,k) dis[i].val=d[q[i]],dis[i].id=q[i];
+    	sort(dis+1,dis+k+1);
+    	int flag=1;
+    	rep(i,2,k)
+    	{
+			if(lca(dis[i-1].id,dis[i].id)==dis[i-1].id) continue;
+			else 
+			{
+				flag=0;
+				break;
+			}
+    	}
+    	if(flag) puts("YES");
+    	else puts("NO");
 	}
 	return 0;
 }
