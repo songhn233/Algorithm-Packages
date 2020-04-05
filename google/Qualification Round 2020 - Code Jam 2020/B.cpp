@@ -1,4 +1,4 @@
-#include<cstdio>//TODO this
+#include<cstdio>
 #include<algorithm>
 #include<cstring>
 #include<iostream>
@@ -21,40 +21,36 @@ template<class T>inline void rd(T &x) {
     if(f)x=-x;
 }
 const int inf=0x3f3f3f3f;
-const int maxn=5050;
-int n,a[maxn],mp[maxn];
-int f[maxn][maxn];
-map<int,int> pp;
+int T;
+string s;
 int main()
 {
-    cin>>n;
-    rep(i,1,n) 
+    cin>>T;
+    for(int tim=1;tim<=T;tim++)
     {
-        rd(a[i]);
-        mp[a[i]]++;
-    }
-    ll ans=inf;
-    for(int col=1;col<=5000;col++)
-    {
-        if(!mp[col]) continue;
-        pp.clear();
-        ll temp=0;
-        for(int i=1;i<=n;i++)
+        cin>>s;
+        printf("Case #%d: ",tim);
+        rep(i,1,s[0]-'0') cout<<"(";
+        cout<<s[0];
+        int cnt=s[0]-'0';
+        for(int i=1;i<s.size();i++)
         {
-            if(a[i]!=col)
+            int temp=s[i]-s[i-1];
+            if(temp<0) 
             {
-                pp[a[i]]++;
+                for(int j=1;j<=-temp;j++) cout<<")";
+                cout<<s[i];
+                if(temp) cnt+=temp;
             }
             else
             {
-                temp+=(int)pp.size();
-                pp.clear();
+                for(int j=1;j<=temp;j++) cout<<"(";
+                cout<<s[i];
+                if(temp) cnt+=temp;
             }
         }
-        if(pp.size()) temp+=(int)pp.size();
-        ans=min(ans,temp);
+        for(int i=1;i<=cnt;i++) cout<<")";
+        cout<<endl;
     }
-    
-    cout<<ans<<endl;
     return 0;
 }

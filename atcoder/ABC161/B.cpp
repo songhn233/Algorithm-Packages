@@ -1,4 +1,4 @@
-#include<cstdio>//TODO this
+#include<cstdio>
 #include<algorithm>
 #include<cstring>
 #include<iostream>
@@ -21,40 +21,22 @@ template<class T>inline void rd(T &x) {
     if(f)x=-x;
 }
 const int inf=0x3f3f3f3f;
-const int maxn=5050;
-int n,a[maxn],mp[maxn];
-int f[maxn][maxn];
-map<int,int> pp;
+const int maxn=150;
+int n,m,a[maxn];
 int main()
 {
-    cin>>n;
-    rep(i,1,n) 
+    cin>>n>>m;
+    int sum=0;
+    rep(i,1,n) rd(a[i]),sum+=a[i];
+    sort(a+1,a+n+1);
+    reverse(a+1,a+n+1);
+    int flag=1;
+    for(int i=1;i<=m;i++)
     {
-        rd(a[i]);
-        mp[a[i]]++;
+        if(4*m*a[i]>=sum) continue;
+        else {flag=0;break;}
     }
-    ll ans=inf;
-    for(int col=1;col<=5000;col++)
-    {
-        if(!mp[col]) continue;
-        pp.clear();
-        ll temp=0;
-        for(int i=1;i<=n;i++)
-        {
-            if(a[i]!=col)
-            {
-                pp[a[i]]++;
-            }
-            else
-            {
-                temp+=(int)pp.size();
-                pp.clear();
-            }
-        }
-        if(pp.size()) temp+=(int)pp.size();
-        ans=min(ans,temp);
-    }
-    
-    cout<<ans<<endl;
+    if(flag) puts("Yes");
+    else puts("No");
     return 0;
 }
