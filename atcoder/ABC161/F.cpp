@@ -21,19 +21,30 @@ template<class T>inline void rd(T &x) {
     if(f)x=-x;
 }
 const int inf=0x3f3f3f3f;
-int n;
-queue<ll> q;
+ll n,ans;
 int main()
 {
     cin>>n;
-    rep(i,1,9) q.push(i);
-    for(int i=1;i<=n-1;i++)
+    for(ll i=2;i<=(n-1)/i;i++)
     {
-        ll u=q.front();q.pop();
-        if(u%10) q.push((u*10)+(u%10)-1);
-        q.push((u*10)+u%10);
-        if(u%10<9) q.push((u*10)+(u%10)+1);
+        if(n%i==1) ans++;
+        if(n%i==1&&(i!=(n-1)/i)) ans++;
     }
-    cout<<q.front()<<endl;
+    for(ll i=2;i<=n/i;i++)
+    {
+        if(n%i==0)
+        {
+            ll temp=n;
+            while(temp%i==0) temp/=i;
+            if(temp%i==1) ans++;
+            if(i==n/i) continue;
+            temp=n;
+            while(temp%(n/i)==0) temp/=(n/i);
+            if(temp%(n/i)==1) ans++;
+        }
+        
+    }
+    if(n==2) cout<<1<<endl;
+    else cout<<ans+2<<endl;
     return 0;
 }
