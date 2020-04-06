@@ -21,8 +21,23 @@ template<class T>inline void rd(T &x) {
     if(f)x=-x;
 }
 const int inf=0x3f3f3f3f;
-
+int T;
+ll n,m;
 int main()
 {
+    cin>>T;
+    while(T--)
+    {
+        cin>>n>>m;
+        ll ans=1;
+        ll i=1;
+        while(i<=n)
+        {
+            if(i*2>n) ans=(ans*(n-i+2))%m;
+            else ans=(ans*(i+1))%m;
+            i*=2;
+        }
+        cout<<((ans-1)%m+m)%m<<endl;
+    }
     return 0;
 }
