@@ -21,35 +21,29 @@ template<class T>inline void rd(T &x) {
     if(f)x=-x;
 }
 const int inf=0x3f3f3f3f;
-const int maxn=300050;
-int T;
-ll n;
-ll a[maxn],b[maxn],t[maxn];
-ll sum=0;
+const int maxn=100050;
+const int N=100000;
+ll T;
+ll s[maxn];
+ll n,l,r;
+ll calc(ll x)
+{
+    if(x>s[n]) return 1;
+    ll temp=lower_bound(s+1,s+n+1,x)-s;
+    ll t=x-s[temp-1];
+    if(t&1) return temp;
+    else return (temp+t/2);
+}
 int main()
 {
     cin>>T;
     while(T--)
     {
-        rd(n);
-        sum=0;
-        rep(i,1,n) rd(a[i]),rd(b[i]);
-        rep(i,1,n) 
-        {
-            if(i==1)
-            {
-                sum+=max(0ll,a[1]-b[n]);
-                t[1]=max(0ll,a[1]-b[n]);
-            }
-            else
-            {
-                sum+=max(0ll,a[i]-b[i-1]);
-                t[i]=max(0ll,a[i]-b[i-1]);
-            }
-        }
-        ll ans=a[1]+sum-t[1];
-        rep(i,2,n) ans=min(ans,a[i]+sum-t[i]);
-        cout<<ans<<endl;
+        rd(n),rd(l),rd(r);
+        s[0]=0;
+        rep(i,1,n) s[i]=s[i-1]+2*(n-i);
+        rep(i,l,r) cout<<calc(i)<<" ";
+        cout<<endl;
     }
     return 0;
 }
