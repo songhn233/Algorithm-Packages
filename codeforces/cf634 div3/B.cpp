@@ -21,40 +21,20 @@ template<class T>inline void rd(T &x) {
     if(f)x=-x;
 }
 const int inf=0x3f3f3f3f;
-const int maxn=5050;
-int n,a[maxn],mp[maxn];
-int f[maxn][maxn];
-map<int,int> pp;
+const int maxn=2050;
+int T,n,a,b;
+char ans[maxn];
 int main()
 {
-    cin>>n;
-    rep(i,1,n) 
+    cin>>T;
+    while(T--)
     {
-        rd(a[i]);
-        mp[a[i]]++;
+        cin>>n>>a>>b;
+        rep(i,1,b) ans[i]=char('a'+i-1);
+        rep(i,b+1,a) ans[i]=char('a'+b-1);
+        rep(i,a+1,n) ans[i]=ans[i-a];
+        rep(i,1,n) cout<<ans[i];
+        cout<<endl;
     }
-    ll ans=inf;
-    for(int col=1;col<=5000;col++)
-    {
-        if(!mp[col]) continue;
-        pp.clear();
-        ll temp=0;
-        for(int i=1;i<=n;i++)
-        {
-            if(a[i]!=col)
-            {
-                pp[a[i]]++;
-            }
-            else
-            {
-                temp+=(int)pp.size();
-                pp.clear();
-            }
-        }
-        if(pp.size()) temp+=(int)pp.size();
-        ans=min(ans,temp);
-    }
-    
-    cout<<ans<<endl;
     return 0;
-}// TODO this
+}
