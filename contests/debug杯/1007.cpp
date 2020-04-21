@@ -20,25 +20,19 @@ template<class T>inline void rd(T &x) {
     while (ch>='0'&&ch<='9'){x=(x<<1)+(x<<3)+(ch^48);ch=getchar();}
     if(f)x=-x;
 }
+const int inf=0x3f3f3f3f;
 const int maxn=100050;
-ll n,m,T;
+int T,n;
 ll a[maxn];
 int main()
 {
-	rd(T);
-	while(T--)
-	{
-		rd(n),rd(m);
-		rep(i,1,n) rd(a[i]);
-		if(n>m)
-		{
-			puts("0");
-			continue;
-		}
-		ll ans=1;
-		rep(i,1,n) rep(j,i+1,n) ans=(ans*abs(a[i]-a[j]))%m;
-		printf("%lld\n",ans);
-	}
-	
-	return 0;
+    cin>>T;
+    while(T--)
+    {
+        cin>>n;
+        rep(i,1,n) rd(a[i]);
+        sort(a+1,a+n+1);
+        
+    }
+    return 0;
 }

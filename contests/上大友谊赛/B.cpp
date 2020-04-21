@@ -20,25 +20,37 @@ template<class T>inline void rd(T &x) {
     while (ch>='0'&&ch<='9'){x=(x<<1)+(x<<3)+(ch^48);ch=getchar();}
     if(f)x=-x;
 }
-const int maxn=100050;
-ll n,m,T;
-ll a[maxn];
+const int inf=0x3f3f3f3f;
+const int maxn=250;
+const double eps=1e-6;
+struct node{
+    int d,id;
+    double t;
+    bool operator<(const node&p) const{
+        if(d!=p.d) return d>p.d;
+        if(t!=p.t) return t>p.t;
+        if(id!=p.id) return id<p.id;
+    }
+}a[maxn],b[maxn];
+int n,num;
 int main()
 {
-	rd(T);
-	while(T--)
-	{
-		rd(n),rd(m);
-		rep(i,1,n) rd(a[i]);
-		if(n>m)
-		{
-			puts("0");
-			continue;
-		}
-		ll ans=1;
-		rep(i,1,n) rep(j,i+1,n) ans=(ans*abs(a[i]-a[j]))%m;
-		printf("%lld\n",ans);
-	}
-	
-	return 0;
+    cin>>n;
+    rep(i,1,n)
+    {
+        cin>>a[i].d>>a[i].id>>a[i].t;
+    }
+    rep(i,1,n)
+    {
+        if(a[i].t<38.0) continue;
+        b[++num]=a[i];
+    }
+    sort(b+1,b+num+1);
+    cout<<num<<endl;
+    rep(i,1,num)
+    {
+        cout<<b[i].d<<" "<<b[i].id<<" ";
+        printf("%.1lf\n",b[i].t);
+    }
+    return 0;
 }

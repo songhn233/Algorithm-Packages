@@ -20,25 +20,25 @@ template<class T>inline void rd(T &x) {
     while (ch>='0'&&ch<='9'){x=(x<<1)+(x<<3)+(ch^48);ch=getchar();}
     if(f)x=-x;
 }
-const int maxn=100050;
-ll n,m,T;
-ll a[maxn];
+const int inf=0x3f3f3f3f;
+const int maxn=3050;
+const ll p=2333;
+int n,m;
+ll f[maxn][maxn],a[maxn][maxn];
 int main()
 {
-	rd(T);
-	while(T--)
-	{
-		rd(n),rd(m);
-		rep(i,1,n) rd(a[i]);
-		if(n>m)
-		{
-			puts("0");
-			continue;
-		}
-		ll ans=1;
-		rep(i,1,n) rep(j,i+1,n) ans=(ans*abs(a[i]-a[j]))%m;
-		printf("%lld\n",ans);
-	}
-	
-	return 0;
+    rd(n),rd(m);
+    rep(i,1,n) rep(j,1,m) rd(a[i][j]);
+    f[n][1]=1;
+    for(int i=n;i>=1;i--)
+    {
+        for(int j=1;j<=m;j++)
+        {
+            if(a[i][j]==1) continue;
+            if(i-1>=1&&a[i-1][j]==0) f[i-1][j]=(f[i-1][j]+f[i][j])%p;
+            if(j+1<=m&&a[i][j+1]==0) f[i][j+1]=(f[i][j+1]+f[i][j])%p;
+        }
+    }
+    cout<<f[1][m]<<endl;
+    return 0;
 }
