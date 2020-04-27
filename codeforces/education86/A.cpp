@@ -21,39 +21,20 @@ template<class T>inline void rd(T &x) {
     if(f)x=-x;
 }
 const int inf=0x3f3f3f3f;
-const int maxn=200050;
 int T;
-int n,k,a[maxn];
+ll x,y,a,b;
 int main()
 {
     cin>>T;
     while(T--)
     {
-        cin>>n>>k;
-        rep(i,1,n) rd(a[i]);
-        int ans=0,l=1;
-        for(int i=1;i<=k;i++)
-        {
-            if(i>1&&a[i-1]<a[i])
-            {
-                if(i<k&&a[i+1]<a[i]) ans++;
-            }
-        }
-        int temp=ans;
-        for(int i=k+1;i<=n;i++)
-        {
-            if(a[i-2]<a[i-1])
-            {
-                if(i-2>=1&&a[i]<a[i-1]) temp++;
-            }
-            if(a[i-k]<a[i-k+1]&&a[i-k+1]>a[i-k+2]) temp--;
-            if(temp>ans)
-            {
-                ans=temp;
-                l=i-k+1;
-            }
-        }
-        cout<<ans+1<<" "<<l<<endl;
+        cin>>x>>y>>a>>b;
+        if(x>y) swap(x,y);
+        ll t=abs(x-y);
+        ll ans=t*a;
+        if(b>2*a) ans+=2*a*x;
+        else ans+=b*x;
+        cout<<ans<<endl;
     }
     return 0;
 }

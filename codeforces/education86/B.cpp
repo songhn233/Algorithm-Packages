@@ -21,39 +21,44 @@ template<class T>inline void rd(T &x) {
     if(f)x=-x;
 }
 const int inf=0x3f3f3f3f;
-const int maxn=200050;
 int T;
-int n,k,a[maxn];
+string s;
 int main()
 {
     cin>>T;
     while(T--)
     {
-        cin>>n>>k;
-        rep(i,1,n) rd(a[i]);
-        int ans=0,l=1;
-        for(int i=1;i<=k;i++)
+        cin>>s;
+        int n=s.size();
+        if(n==1) cout<<s<<endl;
+        else
         {
-            if(i>1&&a[i-1]<a[i])
+            int flag=0;
+            for(int i=0;i<n;i++) 
             {
-                if(i<k&&a[i+1]<a[i]) ans++;
+                if(s[i]!=s[0])
+                {
+                    flag=1;
+                    break;
+                }
             }
+            if(flag==0) cout<<s<<endl;
+            else
+            {
+                for(int i=0;i<n;i++)
+                {
+                    if(i>0&&s[i]==s[i-1])
+                    {
+                        if(s[i]=='0') cout<<"10";
+                        else cout<<"01";
+                    }
+                    else cout<<s[i];
+                }
+                cout<<endl;
+            }
+            
         }
-        int temp=ans;
-        for(int i=k+1;i<=n;i++)
-        {
-            if(a[i-2]<a[i-1])
-            {
-                if(i-2>=1&&a[i]<a[i-1]) temp++;
-            }
-            if(a[i-k]<a[i-k+1]&&a[i-k+1]>a[i-k+2]) temp--;
-            if(temp>ans)
-            {
-                ans=temp;
-                l=i-k+1;
-            }
-        }
-        cout<<ans+1<<" "<<l<<endl;
+        
     }
     return 0;
 }
