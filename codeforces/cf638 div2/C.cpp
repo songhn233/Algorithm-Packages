@@ -22,73 +22,39 @@ template<class T>inline void rd(T &x) {
 }
 const int inf=0x3f3f3f3f;
 const int maxn=100050;
-int T,n,k,a[maxn];
+int T,n,k;
+int a[maxn];
 string s,t;
-string ans;
 int main()
 {
     cin>>T;
     while(T--)
     {
-        ans.clear();
         rd(n),rd(k);
         cin>>s;
-        for(int i=1;i<=n;i++) a[i]=s[i-1]-'0';
-        sort(a+1,a+n+1);
-        t=s;
-        ans="a";
-        for(int i=1;i<=n;i++) t[i-1]=char('0'+a[i]);
-        int rest=k;
-        while(rest)
+        rep(i,0,n-1) a[i]=s[i]-'a';
+        sort(a,a+n);
+        if(a[k-1]!=a[0]) cout<<char('a'+a[k-1])<<endl;
+        else 
         {
-            if(rest==1)
+            int flag=0;
+            for(int i=k+1;i<n;i++) if(a[i]!=a[i-1]) {flag=1;break;}
+            if(flag)
             {
-                ans=max(ans,t);
-                break;
+                string ans="";
+                ans+=char('a'+a[0]);
+                for(int i=k;i<n;i++) ans+=char('a'+a[i]);
+                cout<<ans<<endl;
             }
-            else if(t.size()<=rest)
+            else 
             {
-                string temp;temp.resize(1);     
-                for(int i=0;i<rest;i++) 
-                {
-                    temp[0]=t[i];
-                    ans=max(ans,temp);
-                }
-                break;
+                int cnt=(n-1)/k;
+                string ans="";
+                ans+=char('a'+a[0]);
+                for(int i=1;i<=cnt;i++) ans+=char('a'+a[k]);
+                cout<<ans<<endl;
             }
-            else if(rest==2)
-            {
-                if(t.size()==3||(t[1]==t.back())||(t[0]==t[1]&&t[2]==t.back()))
-                {
-                    string temp;temp.resize(2);
-                    temp[0]=t[0];
-                    temp[1]=t.back();
-                    ans=max(ans,temp);
-                    t=t.substr(1);
-                    int tt=(int)t.size()-1;
-                    t=t.substr(0,tt);
-                    ans=max(ans,t);
-                }
-                else
-                {
-                    ans=max(ans,t.substr(0,1));
-                    ans=max(ans,t.substr(1));
-                }
-                break;
-            }
-            else
-            {
-                string temp;temp.resize(2);
-                temp[0]=t[0];
-                temp[1]=t.back();
-                ans=max(ans,temp);
-                t=t.substr(1);
-                int tt=(int)t.size()-1;
-                t=t.substr(0,tt);
-                rest--;
-            }
-        }
-        cout<<ans<<endl;
+        } 
     }
     return 0;
 }
