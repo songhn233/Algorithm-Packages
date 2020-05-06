@@ -7,6 +7,7 @@
 #include<cmath>
 #include<map>
 #include<set>
+#include<bitset>
 #define ll long long
 #define F(i,a,b) for(int i=(a);i<=(b);i++)
 #define mst(a,b) memset((a),(b),sizeof(a))
@@ -21,25 +22,21 @@ template<class T>inline void rd(T &x) {
     if(f)x=-x;
 }
 const int inf=0x3f3f3f3f;
-const int maxn=100050;
-int n,k,a[maxn];
+const int maxn=1000010;
+bitset<maxn> mp,temp;
+int n;
+int l[maxn],r[maxn];
 int main()
 {
-    cin>>n>>k;
-    int pos=0;
-    rep(i,1,n) 
+    cin>>n;
+    rep(i,1,n) rd(l[i]),rd(r[i]);
+    for(int i=l[1];i<=r[1];i++) mp[i*i]=1;
+    rep(i,2,n)
     {
-        rd(a[i]);
-        if(a[i]==1) pos=i;
+       temp.reset();
+       rep(j,l[i],r[i]) temp|=mp<<(j*j);
+       mp=temp;
     }
-    int ans=inf;
-    for(int l=max(1,pos-k+1);l<=pos;l++)
-    {
-        int r=min(n,l+k-1);
-        int t1=(l+k-3)/(k-1);
-        int t2=(n-r+k-2)/(k-1);
-        ans=min(ans,t1+t2+1);
-    }
-    cout<<ans<<endl;
+    cout<<mp.count()<<endl;
     return 0;
 }
