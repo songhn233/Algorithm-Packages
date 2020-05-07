@@ -21,8 +21,16 @@ template<class T>inline void rd(T &x) {
     if(f)x=-x;
 }
 const int inf=0x3f3f3f3f;
-
+int n,m,T;
 int main()
 {
+    cin>>T;
+    while(T--)
+    {
+        cin>>n>>m;
+        if(n==1||m==1) puts("YES");
+        else if(n==2&&m==2) puts("YES");
+        else puts("NO");
+    }
     return 0;
 }

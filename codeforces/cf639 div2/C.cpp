@@ -21,8 +21,29 @@ template<class T>inline void rd(T &x) {
     if(f)x=-x;
 }
 const int inf=0x3f3f3f3f;
-
+const int maxn=200050;
+int T,n,a[maxn],b[maxn],vis[maxn];
+map<int,int> mp;
 int main()
 {
+    cin>>T;
+    while(T--)
+    {
+        cin>>n;
+        mp.clear();
+        rep(i,0,n-1) 
+        {
+            rd(a[i]);
+            b[i]=((i+a[i])%n+n)%n;
+        }
+        int flag=1;
+        rep(i,0,n-1)
+        {
+            if(mp[b[i]]) {flag=0;break;}
+            else mp[b[i]]=1;
+        }
+        if(flag) puts("YES");
+        else puts("NO");
+    }
     return 0;
 }
