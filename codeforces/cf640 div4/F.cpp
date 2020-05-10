@@ -30,83 +30,21 @@ int main()
     while(T--)
     {
         cin>>a>>b>>c;
-        if(b==1&&c==0)
+        if(b==0)
         {
-            printf("10");
-            for(int i=1;i<=a;i++) printf("0");
+            if(c>0) for(int i=1;i<=c+1;i++) printf("1");
+            if(a>0) for(int i=1;i<=a+1;i++) printf("0");
             cout<<endl;
             continue;
-        }
-        if(b==1&&a==0)
+        } 
+        for(int i=1;i<=c+1;i++) printf("1");
+        for(int i=1;i<=a+1;i++) printf("0");
+        for(int i=1;i<=b-1;i++) 
         {
-            printf("01");
-            for(int i=1;i<=c;i++) printf("1");
-            cout<<endl;
-            continue;
+            if(i&1) printf("1");
+            else printf("0");
         }
-        if(a>0&&b==0&&c==0)
-        {
-            for(int i=1;i<=a+1;i++) printf("0");
-            cout<<endl;
-            continue;
-        }
-        if(c>0&&b==0&&a==0)
-        {
-            for(int i=1;i<=c+1;i++) printf("1");
-            cout<<endl;
-            continue;
-        }
-        if(c==0)
-        {
-            for(int i=1;i<=a+1;i++) printf("0");
-            if(b%2==1) 
-            {
-                printf("1");
-                int t=(b-1)/2;
-                for(int i=1;i<=t;i++) printf("01");
-            }
-            else
-            {
-                int t=b/2;
-                for(int i=1;i<=t;i++) printf("10");
-            }
-            cout<<endl;
-            continue;
-        }
-        if(a==0)
-        {
-            for(int i=1;i<=c+1;i++) printf("1");
-            if(b%2==1) 
-            {
-                printf("0");
-                int t=(b-1)/2;
-                for(int i=1;i<=t;i++) printf("10");
-            }
-            else
-            {
-                int t=b/2;
-                for(int i=1;i<=t;i++) printf("01");
-            }
-            cout<<endl;
-            continue;
-        }
-        if(b%2==1)
-        {
-            for(int i=1;i<=c+1;i++) printf("1");
-            int t=(b-1)/2;
-            for(int i=1;i<=t;i++) printf("01");
-            for(int i=1;i<=a+1;i++) printf("0");
-            cout<<endl;
-        }
-        else
-        {
-            printf("0");
-            for(int i=1;i<=c+1;i++) printf("1");
-            for(int i=1;i<=a+1;i++) printf("0");
-            int t=(b/2)-1;
-            for(int i=1;i<=t;i++) printf("10");
-            cout<<endl;
-        }
+        cout<<endl; 
     }
     return 0;
 }
