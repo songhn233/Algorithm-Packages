@@ -22,23 +22,28 @@ template<class T>inline void rd(T &x) {
 }
 const int inf=0x3f3f3f3f;
 const int maxn=100050;
-const int N=100000;
-int T,n,a[maxn],f[maxn];
+int n,a[maxn];
 int main()
 {
-    cin>>T;
-    while(T--)
+    cin>>n;
+    int maxx=0;
+    rep(i,1,n) rd(a[i]),maxx=max(maxx,a[i]);
+    int flag=0,ans=0;
+    for(int i=1;i<=n;i++)
     {
-        cin>>n;
-        rep(i,1,n) rd(a[i]),f[i]=1;
-        for(int i=1;i<=n;i++)
+        if(a[i]==maxx&&flag==0) 
         {
-            for(int j=i*2;j<=n;j+=i)
-                if(a[j]>a[i]) f[j]=max(f[j],f[i]+1);
+            flag=1;
+            ans=max(ans,flag);
         }
-        int ans=0;
-        rep(i,1,n) ans=max(ans,f[i]);
-        cout<<ans<<endl;
+        else if(a[i]==maxx&&flag) flag++,ans=max(ans,flag);
+        else 
+        {
+            ans=max(ans,flag);
+            flag=0;
+        }
     }
+    ans=max(ans,flag);
+    cout<<ans<<endl;
     return 0;
 }

@@ -31,7 +31,7 @@ int dy[]={0,0,1,-1};
 bool calc(int x,int y)
 {
     if(x<1||x>n||y<1||y>m) return false;
-   
+    if(vis[x][y]) return false;
     return true;
 }
 int cnt=0;
@@ -54,7 +54,9 @@ void dfs2(int x,int y)
     {
         int tx=dx[i]+x,ty=dy[i]+y;
         if(!calc(tx,ty)) continue;
-        if(c[tx][ty]!=c[x][y]&&tt[tx][ty]!=1) continue;
+        if(tt[tx][ty]==1&&cnt>=2) tt[tx][ty]=2;
+        if(c[tx][ty]!=c[x][y]) continue;
+        cnt++;
         dfs2(tx,ty);
     }
 }
@@ -68,8 +70,11 @@ int main()
         for(int j=1;j<=m;j++)
         {
             cnt=1;
-            if(!vis[i][j]) dfs1(i,j);
-            if(cnt==1) tt[i][j]=1;
+            if(!vis[i][j]) 
+            {
+                dfs1(i,j);
+                if(cnt==1) tt[i][j]=1;
+            }
         }
     }
     for(int i=1;i<=n;i++) for(int j=1;j<=m;j++) vis[i][j]=0;
@@ -79,6 +84,7 @@ int main()
         {
             if(tt[i][j]==1) continue;
             if(vis[i][j]) continue;
+            cnt=1;
             dfs2(i,j);
         }
     }
@@ -86,10 +92,10 @@ int main()
     {
         ll x,y,p;
         rd(x),rd(y),rd(p);
-        if(tot==0) cout<<c[x][y]<<endl;
-        else if(p==1)
+        cout<<"#"<<tt[x][y]<<endl;
+        if(p==1)
         {
-            if(tt[x][y]==1) cout<<c[x][y]<<endl;
+            if(tt[x][y]) cout<<c[x][y]<<endl;
             else
             {
                 if(c[x][y]=='1') puts("0");
@@ -98,16 +104,27 @@ int main()
         }
         else
         {
-            if(vis[x][y])
+            if(tt[x][y]==1) cout<<c[x][y]<<endl;
+            else if(tt[x][y]==2)
             {
-                if(p%2==1) cout<<c[x][y]<<endl;
-                else
+                p--;
+                if(p%2==1)
                 {
                     if(c[x][y]=='1') puts("0");
                     else puts("1");
                 }
+                else cout<<c[x][y]<<endl;
             }
-            else cout<<c[x][y]<<endl;
+            else
+            {
+                if(p%2==1)
+                {
+                    if(c[x][y]=='1') puts("0");
+                    else puts("1");
+                }
+                else cout<<c[x][y]<<endl;
+            }
+            
         }
     }
         return 0;

@@ -21,24 +21,17 @@ template<class T>inline void rd(T &x) {
     if(f)x=-x;
 }
 const int inf=0x3f3f3f3f;
-const int maxn=100050;
-const int N=100000;
-int T,n,a[maxn],f[maxn];
+const int maxn=200050;
+ll n,m,k,a[maxn];
 int main()
 {
-    cin>>T;
-    while(T--)
-    {
-        cin>>n;
-        rep(i,1,n) rd(a[i]),f[i]=1;
-        for(int i=1;i<=n;i++)
-        {
-            for(int j=i*2;j<=n;j+=i)
-                if(a[j]>a[i]) f[j]=max(f[j],f[i]+1);
-        }
-        int ans=0;
-        rep(i,1,n) ans=max(ans,f[i]);
-        cout<<ans<<endl;
-    }
+    cin>>n>>m>>k;
+    rep(i,1,n) rd(a[i]);
+    sort(a+1,a+n+1);
+    ll t=k+1;
+    ll cnt=m/t;
+    ll ans=cnt*(a[n]*k+a[n-1]);
+    ans+=(m%t)*a[n];
+    cout<<ans<<endl;
     return 0;
 }
