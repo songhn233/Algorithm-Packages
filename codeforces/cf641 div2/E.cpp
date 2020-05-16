@@ -7,7 +7,7 @@
 #include<cmath>
 #include<map>
 #include<set>
-#define ll long long
+#define int long long
 #define F(i,a,b) for(int i=(a);i<=(b);i++)
 #define mst(a,b) memset((a),(b),sizeof(a))
 #define PII pair<int,int>
@@ -24,7 +24,7 @@ const int inf=0x3f3f3f3f;
 const int maxn=1001;
 int a[maxn][maxn],t;
 int n,m;
-int vis[maxn][maxn],tt[maxn][maxn];
+int vis[maxn][maxn],tt[maxn][maxn],d[maxn][maxn];
 char c[maxn][maxn];
 int dx[]={1,-1,0,0};
 int dy[]={0,0,1,-1};
@@ -60,7 +60,8 @@ void dfs2(int x,int y)
         dfs2(tx,ty);
     }
 }
-int main()
+queue<PII> q;
+signed main()
 {
     cin>>n>>m>>t;
     int tot=0;
@@ -78,53 +79,35 @@ int main()
         }
     }
     for(int i=1;i<=n;i++) for(int j=1;j<=m;j++) vis[i][j]=0;
-    for(int i=1;i<=n;i++)
+    mst(d,0x3f);
+    rep(i,1,n) rep(j,1,m) if(!tt[i][j]) {d[i][j]=0;vis[i][j]=1;q.push(make_pair(i,j));}
+    while(!q.empty())
     {
-        for(int j=1;j<=m;j++)
+        PII u=q.front();q.pop();
+        int x=u.first,y=u.second;
+        for(int i=0;i<4;i++)
         {
-            if(tt[i][j]==1) continue;
-            if(vis[i][j]) continue;
-            cnt=1;
-            dfs2(i,j);
+            int tx=dx[i]+x,ty=dy[i]+y;
+            if(!calc(tx,ty)) continue;
+            d[tx][ty]=d[x][y]+1;
+            vis[tx][ty]=1;
+            q.push(make_pair(tx,ty));
         }
     }
     while(t--)
     {
-        ll x,y,p;
+        int x,y,p;
         rd(x),rd(y),rd(p);
-        cout<<"#"<<tt[x][y]<<endl;
-        if(p==1)
+        if(d[x][y]>p) cout<<c[x][y]<<endl;
+        else
         {
-            if(tt[x][y]) cout<<c[x][y]<<endl;
-            else
+            p-=d[x][y];
+            if(p&1) 
             {
                 if(c[x][y]=='1') puts("0");
                 else puts("1");
             }
-        }
-        else
-        {
-            if(tt[x][y]==1) cout<<c[x][y]<<endl;
-            else if(tt[x][y]==2)
-            {
-                p--;
-                if(p%2==1)
-                {
-                    if(c[x][y]=='1') puts("0");
-                    else puts("1");
-                }
-                else cout<<c[x][y]<<endl;
-            }
-            else
-            {
-                if(p%2==1)
-                {
-                    if(c[x][y]=='1') puts("0");
-                    else puts("1");
-                }
-                else cout<<c[x][y]<<endl;
-            }
-            
+            else cout<<c[x][y]<<endl;
         }
     }
         return 0;
