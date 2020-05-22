@@ -21,36 +21,17 @@ template<class T>inline void rd(T &x) {
     if(f)x=-x;
 }
 const int inf=0x3f3f3f3f;
-const int maxn=250;
-const double eps=1e-6;
-struct node{
-    int d,id;
-    double t;
-    bool operator<(const node&p) const{
-        if(d!=p.d) return d>p.d;
-        if(t!=p.t) return t>p.t;
-        if(id!=p.id) return id<p.id;
-    }
-}a[maxn],b[maxn];
-int n,num;
+const int maxn=200050;
+ll T,n,m,k;
 int main()
 {
-    cin>>n;
-    rep(i,1,n)
+    cin>>T;
+    while(T--)
     {
-        cin>>a[i].d>>a[i].id>>a[i].t;
-    }
-    rep(i,1,n)
-    {
-        if(a[i].t<38.0) continue;
-        b[++num]=a[i];
-    }
-    sort(b+1,b+num+1);
-    cout<<num<<endl;
-    rep(i,1,num)
-    {
-        cout<<b[i].d<<" "<<b[i].id<<" ";
-        printf("%.1lf\n",b[i].t);
+        cin>>n>>m>>k;
+        ll t1=n/2;
+        ll t2=n-t1;
+        cout<<t1*t2*m*k<<endl;
     }
     return 0;
 }

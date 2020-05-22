@@ -21,28 +21,13 @@ template<class T>inline void rd(T &x) {
     if(f)x=-x;
 }
 const int inf=0x3f3f3f3f;
-int n;
+const double eps=1e-7;
+long double x,y;
 int main()
 {
-    cin>>n;
-    if(n==1)
-    {
-        cout<<1<<endl<<1<<endl;
-    }
-    else if(n==2)
-    {
-        cout<<2<<endl<<0<<endl<<11<<endl;
-    }
-    else
-    {
-        cout<<n-1<<endl;
-        rep(i,2,n)
-        {
-            cout<<0;
-            rep(j,1,i-2) cout<<1;
-             cout<<0<<endl;
-        }
-    }
-    
+    cin>>x>>y;
+    if(fabs(y*log(x)-x*log(y))<eps) puts("=");
+    else if(y*log(x)-x*log(y)>0) puts(">");
+    else puts("<");
     return 0;
 }

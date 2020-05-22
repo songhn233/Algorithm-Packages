@@ -21,18 +21,49 @@ template<class T>inline void rd(T &x) {
     if(f)x=-x;
 }
 const int inf=0x3f3f3f3f;
-int T,n,a,b;
-int gcd(int a,int b){return b?gcd(b,a%b):a;}
+int n,vis[25],a[25],x[25],y[25];
+int T,sx,sy,ans,p1,p2;
+void dfs(int d)
+{
+	if(d==n+1)
+	{
+        int res=0;
+        int prex=sx,prey=sy;
+		for(int i=1;i<=n;i++) 
+        {
+            res+=abs(prex-x[a[i]])+abs(prey-y[a[i]]);
+            prex=x[a[i]];prey=y[a[i]];
+        }
+        res+=abs(prex-sx)+abs(prey-sy);
+        ans=min(ans,res);
+		return ;
+	}
+	for(int i=1;i<=n;i++)
+	{
+		if(!vis[i])
+		{
+			vis[i]=1;
+			a[d]=i;
+			dfs(d+1);
+			vis[i]=0;
+			a[d]=0;
+		}
+	}
+}
 int main()
 {
     cin>>T;
     while(T--)
     {
-        cin>>n>>a>>b;
-        if(a>b) swap(a,b);
-        int t=gcd(a,b);
-        if((n/t)%2==1) puts("Yes");
-        else puts("No");
+        ans=inf;
+        mst(vis,0);
+        cin>>p1>>p2;
+        cin>>sx>>sy;
+        cin>>n;
+        rep(i,1,n) cin>>x[i]>>y[i];
+	    dfs(1);
+        cout<<"The shortest path has length "<<ans<<endl;
     }
-    return 0;
+	
+	return 0;
 }

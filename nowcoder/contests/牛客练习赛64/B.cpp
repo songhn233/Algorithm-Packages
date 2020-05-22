@@ -21,41 +21,42 @@ template<class T>inline void rd(T &x) {
     if(f)x=-x;
 }
 const int inf=0x3f3f3f3f;
-const int maxn=100050;
-ll T,n;
+const int maxn=200050;
+int n,fa[maxn],siz[maxn],ans[maxn];
 vector<int> e[maxn];
-ll p[maxn],c[maxn],t[maxn];
-void dfs(int u,int fa)
+void dfs(int u,int f)
 {
+    fa[u]=f;
+    siz[u]=0;
     for(int i=0;i<e[u].size();i++)
     {
         int v=e[u][i];
-        if(v==fa) continue;
+        if(v==f) continue;
         dfs(v,u);
-        if(t[v]<0) t[u]+=t[v];
+        siz[u]++;
     }
 }
 int main()
 {
-    cin>>T;
-    while(T--)
+    rd(n);
+    rep(i,1,n-1) 
     {
-        cin>>n;
-        rep(i,1,n) e[i].clear();
-        rep(i,1,n-1)
-        {
-            int x,y;rd(x),rd(y);
-            e[x].push_back(y);
-            e[y].push_back(x);
-        }
-        rep(i,1,n)
-        {
-            rd(p[i]),rd(c[i]);
-            t[i]=c[i]-p[i];
-        }
-        dfs(1,0);
-        if(t[1]>=0) puts("YES");
-        else puts("NO");
+        int x,y;rd(x),rd(y);
+        e[x].push_back(y);
+        e[y].push_back(x);
     }
+    dfs(1,0);
+    rep(i,1,n)
+    {
+        if(fa[fa[i]]) ans[i]++;
+        if(fa[i]) ans[i]+=(siz[fa[i]]-1);
+        for(int j=0;j<e[i].size();j++)
+        {
+            int v=e[i][j];
+            if(v==fa[i]) continue;
+            if(siz[v]) ans[i]+=siz[v];
+        }
+    }
+    rep(i,1,n) printf("%d\n",ans[i]);
     return 0;
 }

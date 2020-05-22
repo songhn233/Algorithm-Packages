@@ -21,11 +21,27 @@ template<class T>inline void rd(T &x) {
     if(f)x=-x;
 }
 const int inf=0x3f3f3f3f;
-string a,b;
+int T;
+ll a,b,c,d;
 int main()
 {
-    cin>>a>>b;
-    if(a!=b) cout<<max((int)a.size(),(int)b.size())<<endl;
-    else puts("-1");
+    cin>>T;
+    while(T--)
+    {
+        cin>>a>>b>>c>>d;
+        ll res=b;
+        if(b>=a) cout<<b<<endl;
+        else
+        {
+            ll temp=c-d;
+            if(c-d<=0) puts("-1");
+            else
+            {
+                ll cnt=(a-b+c-d-1)/(c-d);
+                cout<<b+cnt*c<<endl;
+            }
+            
+        }
+    }
     return 0;
 }

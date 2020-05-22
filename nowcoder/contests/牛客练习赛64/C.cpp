@@ -21,26 +21,21 @@ template<class T>inline void rd(T &x) {
     if(f)x=-x;
 }
 const int inf=0x3f3f3f3f;
-const int maxn=20000002;
-const ll p=1e9+7;
-ll n;
-ll ksm(ll a,ll b)
-{
-    ll res=1;
-    while(b)
-    {
-        if(b&1) res=(res*a)%p;
-        a=(a*a)%p;
-        b>>=1;
-    }
-    return res;
-}
+const int maxn=200050;
+const ll mod=1e9+7;
+int n;
+ll a[maxn];
 int main()
 {
     cin>>n;
-    ll t=1;
-    for(ll i=1;i<=n+1;i++) t=(t*i)%p;
-    ll k=ksm(2,n);
-    cout<<(ksm(t,p-2)*k)%p<<endl;
+    rep(i,1,n) rd(a[i]);
+    ll ans=0;
+    ll pre=0;
+    rep(i,1,n)
+    {
+        pre=(pre+i*a[i])%mod;
+        ans=(ans+a[i]*pre*(n-i+1))%mod; 
+    }
+    cout<<ans<<endl;
     return 0;
 }
