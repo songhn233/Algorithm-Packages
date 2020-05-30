@@ -21,51 +21,45 @@ template<class T>inline void rd(T &x) {
     if(f)x=-x;
 }
 const int inf=0x3f3f3f3f;
-const int maxn=100010;
-const int maxm=400010;
-int n,m,fa[maxn],cnt[maxn],ans,pan;
-int num,head[maxn],vis[maxn];
-vector<int> e[maxn];
-// struct node{
-//     int v,nex;
-//     // bool operator<(const node&t) const{
-//     //     if(max(u,v)<max(t.u,t.v)) return true;
-//     //     else return (min(u,v)<min(t.u,t.v));
-//     // }
-// }e[maxm];
+const int maxn=400010;
+int n,m,fa[maxn],cnt[maxn],ans,num;
+struct node{
+    int u,v;
+    PII w;
+    bool operator<(const node&t) const{
+        int a=w.first,b=w.second;
+        int c=t.w.first,d=t.w.second;
+        if(a<b) swap(a,b);
+        if(c<d) swap(c,d);
+        if(a==c) return b<d;
+        else return a<c;
+    }
+}e[maxn];
 int findx(int x){if(x!=fa[x])fa[x]=findx(fa[x]);return fa[x];}
 void kruskal()
 {
-    for(int i=1;i<=n;i++)
+    for(int i=1;i<=m;i++)
     {
-        if(pan>=n-1) break;
-        sort(e[i].begin(),e[i].end());
-        for(int j=0;j<e[i].size();j++)
-        {
-            if(pan>=n-1) break;
-            int v=e[i][j];
-            int x=i,y=v;
-            int xx=findx(x),yy=findx(y);
-            if(xx==yy) continue;
-            fa[xx]=yy;
-            pan++;
-            cnt[x]++;cnt[y]++;
-            ans=max(ans,max(cnt[x],cnt[y]));
-        }
+        int x=e[i].u,y=e[i].v;
+        int xx=findx(x),yy=findx(y);
+        if(xx==yy) continue;
+        fa[xx]=yy;
+        cnt[x]++,cnt[y]++;
     }
 }
 int main()
 {
-    scanf("%d%d",&n,&m);
+    cin>>n>>m;
     rep(i,1,n) fa[i]=i;
-    int x,y;
     for(int i=1;i<=m;i++)
     {
-        scanf("%d%d",&x,&y);
-        if(x>y) swap(x,y);
-        e[y].push_back(x);
+        int x,y;rd(x),rd(y);
+        e[++num]={x,y,make_pair(x,y)};
     }
+    sort(e+1,e+m+1);
     kruskal();
-    printf("%d\n",ans);
+    int ans=0;
+    rep(i,1,n) ans=max(ans,cnt[i]);
+    cout<<ans<<endl;
     return 0;
 }
