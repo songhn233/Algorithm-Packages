@@ -65,7 +65,6 @@ int main()
             matrix g;
             g.f[0][0]=1,g.f[0][1]=1,g.f[1][0]=1,g.f[1][1]=0;
             matrix temp=ksm(g,n);
-            //cout<<temp.f[0][0]<<"--"<<endl;
             matrix s;
             memset(s.f,0,sizeof(s.f));
             s.f[0][0]=1;
