@@ -2,6 +2,7 @@
 主要用来记录算法刷题记录和一些模板
 ### 文件结构
 #### leetcode
+存放leetcode题目和周赛
 #### atcoder
 用于存放参与和vp的atcoder比赛
 #### codeforces
