@@ -1,0 +1,19 @@
+/**
+ * @param {string} name
+ * @param {string} typed
+ * @return {boolean}
+ */
+const isLongPressedName = (name, typed) => {
+  let i = 0, j = 0
+  for(; i < typed.length;) {
+    if(typed[i] === name[j]) {
+      i ++, j ++
+    } else if(typed[i] === name[j - 1]) {
+      i ++
+    } else {
+      return false
+    }
+  }
+  if(j === name.length) return true
+  return false
+}
