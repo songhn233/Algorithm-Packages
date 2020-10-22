@@ -9,30 +9,25 @@
  * @param {string} S
  * @return {number[]}
  */
-const calc = (S, index) => {
+const partitionLabels = (S) => {
   const map = new Map()
-  for (let i = index; i < S.length; i++) {
+  for (let i = 0; i < S.length; i++) {
     if (map.has(S[i])) {
       map.set(S[i], i)
     } else {
       map.set(S[i], i)
     }
   }
-  let ans = index
-  for (let i = index; i < S.length; i++) {
-    if (i <= ans) ans = Math.max(ans, map.get(S[i]))
-  }
-  return ans
-}
-const partitionLabels = (S) => {
   let index = 0,
     pre = 0
   const ans = []
-  while (index < S.length) {
-    index = calc(S, index)
-    ans.push(index - pre + 1)
-    index++
-    pre = index
+  for (let i = 0; i < S.length; i++) {
+    index = Math.max(index, map.get(S[i]))
+    if (i >= index) {
+      ans.push(i - pre + 1)
+      pre = index + 1
+      index++
+    }
   }
   return ans
 }
