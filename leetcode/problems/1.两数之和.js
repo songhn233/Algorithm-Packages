@@ -1,29 +1,17 @@
-/*
- * @lc app=leetcode.cn id=1 lang=javascript
- *
- * [1] 两数之和
- */
-
-// @lc code=start
 /**
  * @param {number[]} nums
  * @param {number} target
  * @return {number[]}
  */
-var twoSum = function(nums, target) {
-  const map = new Map();
-  const ans = [];
-  nums.forEach((item, index) => {
-    if (map.get(target - item) !== undefined) {
-      if (!ans.length) {
-        ans.push(map.get(target - item));
-        ans.push(index);
-      }
-    } else {
-      map.set(item, index);
+const twoSum = function (nums, target) {
+  const map = new Map()
+  let ans = []
+  for (let [index, val] of nums.entries()) {
+    if (map.has(target - val)) {
+      ans = [index, map.get(target - val)]
+      break
     }
-  });
-  return ans;
+    map.set(val, index)
+  }
+  return ans
 };
-// @lc code=end
-
