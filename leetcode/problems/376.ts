@@ -1,6 +1,5 @@
 const wiggleMaxLength = (nums: number[]): number => {
   if (nums.length === 1) return 1
-  if (nums.length === 2) return nums[0] === nums[1] ? 1 : 2
   const n = nums.length
   let pre = 0,
     ans = 0
@@ -10,11 +9,8 @@ const wiggleMaxLength = (nums: number[]): number => {
       ans++
       continue
     }
-    if (diff * pre > 0) {
-      ans++
-    } else {
-      pre = diff
-    }
+    if (diff * pre > 0) ans++
+    pre = diff
   }
   return n - ans
 }
