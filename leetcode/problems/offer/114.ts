@@ -1,11 +1,10 @@
 function alienOrder(words: string[]): string {
-  const edges = new Map()
-  const count: Record<string, number> = {},
-    vis: Record<string, boolean> = {}
+  const edges: Record<string, Set<string>> = {}
+  const count: Record<string, number> = {}
   for (let word of words) {
     for (let c of word) {
-      if (!edges.has(c)) {
-        edges.set(c, [])
+      if (!edges[c]) {
+        edges[c] = new Set()
         count[c] = 0
       }
     }
@@ -17,11 +16,10 @@ function alienOrder(words: string[]): string {
     let j = 0
     for (j = 0; j < len; j++) {
       if (pre[j] === cur[j]) continue
-      if (vis[`${pre[j]}${cur[j]}`]) break
-      const val = edges.get(pre[j])
-      edges.set(pre[j], [...val, cur[j]])
-      vis[`${pre[j]}${cur[j]}`] = true
-      ++count[cur[j]]
+      if (!edges[pre[j]].has(cur[j])) {
+        ++count[cur[j]]
+        edges[pre[j]].add(cur[j])
+      }
       break
     }
     if (j === len && pre.length > cur.length) {
@@ -29,7 +27,7 @@ function alienOrder(words: string[]): string {
     }
   }
   const q = []
-  ;[...edges.keys()].forEach((v) => {
+  Object.keys(edges).forEach((v) => {
     if (count[v] === 0) {
       q.push(v)
     }
@@ -38,7 +36,7 @@ function alienOrder(words: string[]): string {
   while (q.length) {
     const node = q.shift()
     ans.push(node)
-    const list = edges.get(node)
+    const list = edges[node]
     for (let v of list) {
       --count[v]
       if (count[v] === 0) {
@@ -46,7 +44,7 @@ function alienOrder(words: string[]): string {
       }
     }
   }
-  if (ans.length !== [...edges.keys()].length) {
+  if (ans.length !== Object.keys(edges).length) {
     return ''
   } else {
     return ans.join('')
