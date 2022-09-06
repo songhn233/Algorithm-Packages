@@ -1,13 +1,10 @@
+const repeat = (n: number) => Array(n).fill(' ').join('')
 function reorderSpaces(text: string): string {
   const count = (text.match(/\s/g) ?? []).length
-  const arr = text.split(' ').filter(Boolean)
-  if (arr.length <= 1) {
-    return arr[0] + Array(count).fill(' ').join('')
+  const words = text.split(' ').filter(Boolean)
+  const len = words.length - 1
+  if (len <= 0) {
+    return words[0] + repeat(count)
   }
-  const rst = count % (arr.length - 1)
-  const n = Math.floor(count / (arr.length - 1))
-  const ans = arr.map((v, idx) =>
-    idx < arr.length - 1 ? v + Array(n).fill(' ').join('') : v
-  )
-  return ans.join('') + Array(rst).fill(' ').join('')
+  return words.join(repeat(Math.floor(count / len))) + repeat(count % len)
 }
